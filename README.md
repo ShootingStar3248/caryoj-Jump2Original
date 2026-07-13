@@ -1,4 +1,4 @@
-# HydroOJ 跳转工具
+# caryoj-Jump2Original
 
 一个 Tampermonkey 用户脚本，为 caryoj 题目页面添加便捷的跳转和搜索功能。
 
