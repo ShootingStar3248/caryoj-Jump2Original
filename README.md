@@ -1,14 +1,18 @@
+> 由于 github 渲染问题，本文章中部分渲染有误，需要更好的阅读体验可自行渲染。
+
 # caryoj-Jump2Original
-$
+
+\[
 \newcommand{\y}{\boldsymbol{\checkmark}}
 \newcommand{\n}{\boldsymbol{\times}}
-$
+\]
+
 一个 Tampermonkey 用户脚本，为 caryoj 题目页面添加便捷的跳转和搜索功能。
 
 ## 主要功能
 
 - **查看原题**：一键跳转到题目来源网站（洛谷、Codeforces、AtCoder、SPOJ、BZOJ）
-- **查看题解**：跳转到洛谷题解区（仅洛谷题目显示，黄色按钮）
+- **查看题解**：跳转到洛谷题解区（仅洛谷题目显示）
 - **洛谷搜索**：在洛谷搜索题目，支持两种模式：
   - **搜索并跳转**：自动跳转到第一个搜索结果
   - **显示列表**：打开洛谷搜索列表页面
@@ -29,7 +33,7 @@ $
 
 ### 原题跳转支持
 | 来源 | 示例 ID | 跳转链接 |
-|------|---------|----------|
+|:-:|:-:|:-:|
 | 洛谷 | `luogu-P1000` | `https://www.luogu.com.cn/problem/P1000` |
 | Codeforces | `codeforces-1000A` | `https://codeforces.com/problemset/problem/1000/A` |
 | AtCoder | `atcoder-ABC123A` | `https://atcoder.jp/contests/abc123/tasks/abc123_a` |
@@ -46,7 +50,7 @@ $
 2. 页面标题旁会出现操作按钮：
 
 | 按钮 | 显示条件 | 功能 |
-|------|---------|------|
+|:-:|:-:|:-:|
 | <span style="display: inline-block; padding: 5px 12px; margin-right: 6px; background-color: rgb(45, 140, 240); color: rgb(255, 255, 255); border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; cursor: default; border: none; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;">查看原题</span> | 来源为 luogu/codeforces/atcoder/spoj/bzoj | 跳转到题目来源网站 |
 | <span style="display: inline-block; padding: 5px 12px; margin-right: 6px; background-color: rgb(92, 184, 92); color: rgb(255, 255, 255); border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; cursor: default; border: none; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;">在洛谷搜索</span> | 非洛谷题目 | 弹窗输入关键词搜索 |
 | <span style="display: inline-block; padding: 5px 12px; margin-right: 6px; background-color: rgb(240, 173, 78); color: rgb(255, 255, 255); border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; cursor: default; border: none; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;">查看题解</span> | 仅洛谷题目 | 跳转到洛谷题解区 |
@@ -74,10 +78,10 @@ $
 - 精确匹配 `/p/xxxxx` 格式（一层路径），不会匹配 `/p/xxx/yyy` 等二级路径
 - 自动检测错误页面（`.error__twd2` 元素）并移除按钮
 - 示例匹配：
-  - $\y$ `https://www.caryoj.cn/p/luogu-P2458`
-  - $\y$ `https://www.caryoj.cn/p/luogu-P2458?lang=zh`
-  - $\y$ `https://www.caryoj.cn/p/anything`
-  - $\n$ `https://www.caryoj.cn/p/luogu-P2458/submit`
+  - \(\y\) `https://www.caryoj.cn/p/luogu-P2458`
+  - \(\y\) `https://www.caryoj.cn/p/luogu-P2458?lang=zh`
+  - \(\y\) `https://www.caryoj.cn/p/anything`
+  - \(\n\) `https://www.caryoj.cn/p/luogu-P2458/submit`
 
 ### URL 解析
 - 支持 `prefix-id` 格式（如 `luogu-P1000`）
@@ -94,10 +98,10 @@ $
 
 | 页面路径 | 查看原题 | 在洛谷搜索 | 查看题解 |
 |:-:|:-:|:-:|:-:|
-| `/p/luogu-P2458` | $\y$ | $\n$ | $\y$ |
-| `/p/codeforces-487E` | $\y$ | $\y$ | $\n$ |
-| `/p/unknown-xxx` | $\n$ | $\y$ | $\n$ |
-| `/p/anything` | $\n$ | $\y$ | $\n$ |
+| `/p/luogu-P2458` | \(\y\) | \(\n\) | \(\y\) |
+| `/p/codeforces-487E` | \(\y\) | \(\y\) | \(\n\) |
+| `/p/unknown-xxx` | \(\n\) | \(\y\) | \(\n\) |
+| `/p/anything` | \(\n\) | \(\y\) | \(\n\) |
 
 ## 更新日志
 
