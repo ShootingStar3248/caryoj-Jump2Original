@@ -3,7 +3,7 @@
 // @author       DeepSeek-v4-flash & ShootingStar
 // @description  在 caryoj 题目页面添加跳转按钮，支持跳转到原题与洛谷搜索。
 // @namespace    http://tampermonkey.net/
-// @version      6.7
+// @version      6.8
 // @match        https://www.caryoj.cn/p/*
 // @match        https://www.luogu.com.cn/problem/*
 // @grant        GM_xmlhttpRequest
@@ -338,7 +338,7 @@
     // 在洛谷搜索
     function searchOnLuogu(keyword, autoJump = true) {
         return new Promise((resolve, reject) => {
-            const searchUrl = `https://www.luogu.com.cn/problem/list?keyword=${encodeURIComponent(keyword)}`;
+            const searchUrl = `https://www.luogu.com.cn/problem/list?type=all&keyword=${encodeURIComponent(keyword)}`;
             console.log(`洛谷搜索: ${searchUrl}`);
 
             GM_xmlhttpRequest({
@@ -654,7 +654,7 @@
                 const autoJump = (action === 'jump');
                 const url = await searchOnLuogu(keyword, autoJump);
 
-                const searchListUrl = `https://www.luogu.com.cn/problem/list?keyword=${encodeURIComponent(keyword)}`;
+                const searchListUrl = `https://www.luogu.com.cn/problem/list?type=all&keyword=${encodeURIComponent(keyword)}`;
 
                 if (action === 'list') {
                     window.open(searchListUrl, '_blank');
