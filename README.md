@@ -2,10 +2,10 @@
 
 # caryoj-Jump2Original
 
-\[
+$$
 \newcommand{\y}{\boldsymbol{\checkmark}}
 \newcommand{\n}{\boldsymbol{\times}}
-\]
+$$
 
 一个 Tampermonkey 用户脚本，为 caryoj 题目页面添加便捷的跳转和搜索功能。
 
@@ -78,10 +78,10 @@
 - 精确匹配 `/p/xxxxx` 格式（一层路径），不会匹配 `/p/xxx/yyy` 等二级路径
 - 自动检测错误页面（`.error__twd2` 元素）并移除按钮
 - 示例匹配：
-  - \(\y\) `https://www.caryoj.cn/p/luogu-P2458`
-  - \(\y\) `https://www.caryoj.cn/p/luogu-P2458?lang=zh`
-  - \(\y\) `https://www.caryoj.cn/p/anything`
-  - \(\n\) `https://www.caryoj.cn/p/luogu-P2458/submit`
+  - $\y$ `https://www.caryoj.cn/p/luogu-P2458`
+  - $\y$ `https://www.caryoj.cn/p/luogu-P2458?lang=zh`
+  - $\y$ `https://www.caryoj.cn/p/anything`
+  - $\n$ `https://www.caryoj.cn/p/luogu-P2458/submit`
 
 ### URL 解析
 - 支持 `prefix-id` 格式（如 `luogu-P1000`）
@@ -98,12 +98,15 @@
 
 | 页面路径 | 查看原题 | 在洛谷搜索 | 查看题解 |
 |:-:|:-:|:-:|:-:|
-| `/p/luogu-P2458` | \(\y\) | \(\n\) | \(\y\) |
-| `/p/codeforces-487E` | \(\y\) | \(\y\) | \(\n\) |
-| `/p/unknown-xxx` | \(\n\) | \(\y\) | \(\n\) |
-| `/p/anything` | \(\n\) | \(\y\) | \(\n\) |
+| `/p/luogu-P2458` | $\y$ | $\n$ | $\y$ |
+| `/p/codeforces-487E` | $\y$ | $\y$ | $\n$ |
+| `/p/unknown-xxx` | $\n$ | $\y$ | $\n$ |
+| `/p/anything` | $\n$ | $\y$ | $\n$ |
 
 ## 更新日志
+
+### v6.8
+解决了在主题库而非全部题目中搜索的问题
 
 ### v6.7
 新增"查看题解"按钮，仅洛谷题目可用
