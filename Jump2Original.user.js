@@ -3,7 +3,7 @@
 // @author       DeepSeek-v4-flash & ShootingStar
 // @description  在 caryoj 题目页面添加跳转按钮，支持跳转到原题与洛谷搜索。
 // @namespace    http://tampermonkey.net/
-// @version      6.8
+// @version      6.9
 // @match        https://www.caryoj.cn/p/*
 // @match        https://www.luogu.com.cn/problem/*
 // @grant        GM_xmlhttpRequest
@@ -18,30 +18,25 @@
 
     // ============ 工具函数 ============
 
-    // 匹配 /p/ 下的一层路径，后面不能有 /
     function isProblemPage() {
         const path = window.location.pathname;
         return /^\/p\/[^\/]+$/.test(path);
     }
 
-    // 检查页面是否有错误元素
     function hasErrorElement() {
         return document.querySelector('.error__twd2') !== null;
     }
 
-    // 检查是否是通过搜索跳转过来的（URL参数标记）
     function checkIfFromSearch() {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get('from_hydro_search') === '1';
     }
 
-    // 从URL获取搜索列表链接
     function getSearchListUrlFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get('search_list_url');
     }
 
-    // 解析当前URL获取题目来源和ID
     function parseProblemUrl() {
         const currentUrl = window.location.href;
         const match = currentUrl.match(/\/p\/([^\/?]+)/);
@@ -63,7 +58,7 @@
         };
     }
 
-    // ============ 悬浮球功能（在洛谷页面显示） ============
+    // ============ 悬浮球功能 ============
     function addFloatingBall() {
         if (!window.location.href.match(/https:\/\/www\.luogu\.com\.cn\/problem\/.+/)) {
             return;
@@ -256,7 +251,7 @@
     // ============ 主页面功能 ============
 
     // 支持的来源列表（显示"查看原题"）
-    const ORIGINAL_SOURCES = ['luogu', 'codeforces', 'atcoder', 'spoj', 'bzoj'];
+    const ORIGINAL_SOURCES = ['luogu', 'codeforces', 'atcoder', 'spoj', 'bzoj', 'loj'];
 
     // 构建跳转到原题的URL
     function buildOriginalUrl(prefix, id) {
@@ -297,6 +292,14 @@
                 return `https://darkbzoj.cc/problem/${numericId}`;
             }
             return `https://darkbzoj.cc/problem/${id}`;
+        }
+
+        // LOJ (LibreOJ)
+        if (prefix === 'loj') {
+            // LOJ 的 URL 格式：https://loj.ac/p/题目ID
+            // 注意：id 可能包含 P 前缀，如 P10043，需要去掉
+            const cleanId = id.replace(/^P/i, '');
+            return `https://loj.ac/p/${cleanId}`;
         }
 
         if (prefix === 'luogu') {
@@ -723,9 +726,7 @@
 
         container.innerHTML = '';
 
-        // 只有有前缀且在支持列表中的才显示"查看原题"
         const showOriginal = prefix && ORIGINAL_SOURCES.includes(prefix);
-        // 所有非洛谷前缀的页面都显示搜索按钮（包括无前缀的）
         const showSearch = prefix !== 'luogu';
 
         // 1. 查看原题
@@ -748,9 +749,7 @@
         }
 
         // 3. 查看题解（仅当是洛谷题目时显示）
-        // 例如 /p/luogu-P2458
         if (prefix === 'luogu') {
-            // 构建题解链接：洛谷题解区
             const solutionUrl = `https://www.luogu.com.cn/problem/solution/${id}`;
             const solutionBtn = createButton('查看题解', solutionUrl, '#f0ad4e', '#ec971f');
             container.appendChild(solutionBtn);
@@ -774,7 +773,6 @@
 
     // ============ 初始化 ============
 
-    // 如果在洛谷页面，添加悬浮球
     if (window.location.href.match(/https:\/\/www\.luogu\.com\.cn\/problem\/.+/)) {
         if (document.readyState === 'complete') {
             setTimeout(addFloatingBall, 500);
@@ -785,7 +783,6 @@
         }
     }
 
-    // 如果在HydroOJ页面
     if (window.location.href.match(/https:\/\/www\.caryoj\.cn\/p\/.+/)) {
         if (!isProblemPage()) {
             console.log('当前页面不是 /p/ 一层路径页面，脚本不执行');
