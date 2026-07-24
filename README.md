@@ -39,6 +39,7 @@ $$
 | AtCoder | `atcoder-ABC123A` | `https://atcoder.jp/contests/abc123/tasks/abc123_a` |
 | SPOJ | `spoj-ABCDE` | `https://www.spoj.com/problems/ABCDE/` |
 | BZOJ | `bzoj-1001` | `https://darkbzoj.cc/problem/1001` |
+| BZOJ | `loj-p10000` | `https://loj.ac/p/10000` |
 
 ### 悬浮球支持
 - `https://www.luogu.com.cn/problem/*` - 从 caryoj 搜索跳转后显示
@@ -104,6 +105,9 @@ $$
 | `/p/anything` | $\n$ | $\y$ | $\n$ |
 
 ## 更新日志
+
+### v6.9
+添加了“查看原题”功能对 loj 题目的支持
 
 ### v6.8
 解决了在主题库而非全部题目中搜索的问题
